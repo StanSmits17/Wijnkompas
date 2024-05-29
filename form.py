@@ -4,7 +4,7 @@ import pandas as pd
 def average_score(questions, question_numbers, base_image_path):
     scores = []
     for i, question in enumerate(questions):
-        image_path = f"{base_image_path}/vraag {question_numbers[i]}.jpg"
+        image_path = f"{base_image_path}/vraag{question_numbers[i]}.jpg"
         try:
             st.image(image_path, caption=f"Vraag {question_numbers[i]}")
         except Exception as e:
@@ -62,12 +62,12 @@ def show_form():
     column_images = {
         "Citrusfruit": f"{base_image_path}/Citrusfruit.jpg",
         "Appel": f"{base_image_path}/Appel.jpg",
-        "Tropisch fruit": f"{base_image_path}/Tropisch fruit.jpg",
+        "Tropisch fruit": f"{base_image_path}/Tropisch_fruit.jpg",
         "Steenfruit": f"{base_image_path}/Steenfruit.jpg",
         "Meloen": f"{base_image_path}/Meloen.jpg",
         "Peer": f"{base_image_path}/Peer.jpg",
         "Noten": f"{base_image_path}/Noten.jpg",
-        "Rood fruit": f"{base_image_path}/Rood fruit.jpg",
+        "Rood fruit": f"{base_image_path}/Rood_fruit.jpg",
         "Bloemen": f"{base_image_path}/Bloemen.jpg",
         "Honing": f"{base_image_path}/Honing.jpg",
         "Kruiden": f"{base_image_path}/Kruiden.jpg"
