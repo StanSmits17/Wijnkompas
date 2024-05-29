@@ -44,7 +44,7 @@ def show_result():
     nn_model.fit(data.drop('Druivensoort', axis=1))
     distances, indices = nn_model.kneighbors(user_data.drop('Druivensoort', axis=1))
 
-    st.subheader("Top 5 druif aanbevelingen")
+    st.subheader("Top 5 grape recommandations")
     user_profile = user_data.drop('Druivensoort', axis=1).values
     top_grapes_indices = indices[0]
     top_grapes = data.iloc[top_grapes_indices]
@@ -63,7 +63,7 @@ def show_result():
     cluster_label = kmeans.predict(user_data.drop('Druivensoort', axis=1))
     cluster_data = data.iloc[kmeans.labels_ == cluster_label[0]]['Druivensoort']
     cluster_df = pd.DataFrame(cluster_data)
-    st.subheader("Vergelijkbare druiven")
+    st.subheader("Similar grapes")
     st.table(cluster_data)
 
     labels = data.columns[1:]
