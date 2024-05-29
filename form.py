@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-def average_score(questions, question_numbers, base_image_path):
+def average_score(questions, question_numbers):
     scores = []
     for i, question in enumerate(questions):
         image_path = f"png/vraag{question_numbers[i]}.jpg"
@@ -32,7 +32,7 @@ def show_form():
         "4 Do you prefer a light refreshing wine (1) or a heavier dry wine (5)?",
         "5 How do you feel about the tartness of berries in your wine?",
         "6 How important is the freshness that acid adds to a wine to you?"
-    ], [1, 2, 3, 4, 5, 6], base_image_path)
+    ], [1, 2, 3, 4, 5, 6])
     
     body_vol_score = average_score([
         "7 How important is the mouthfeel of the wine to you? Do you like light, fresh wines (1), or rich, fuller wines (5)?",
@@ -41,7 +41,7 @@ def show_form():
         "10 Is a heavy wine something you look for?",
         "11 Do you prefer dishes with meat and fish fried in butter (5, creamier) or from the grill (1, firmer)?",
         "12 How important is the length of the aftertaste to you?"
-    ], [7, 8, 9, 10, 11, 12], base_image_path)
+    ], [7, 8, 9, 10, 11, 12])
     
     suiker_zoet_score = average_score([
         "13 How sweet can the wine be for you?",
@@ -51,7 +51,7 @@ def show_form():
         "17 How important is the sweetness and other components in the wine for you?",
         "18 How would you describe the sweetness level of your favorite wine?",
         "19 If you have a preference, do you prefer savory (1) or sweet (5) snacks?"
-    ], [13, 14, 15, 16, 17, 18, 19], base_image_path)
+    ], [13, 14, 15, 16, 17, 18, 19])
     
     # Using loc for safer data setting
     data.loc[0, 'Zuur'] = zuur_score
