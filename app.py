@@ -13,9 +13,9 @@ def menu():
 
     if page == "Home":
         show_home()
-    elif page == "Vragenlijst":
+    elif page == "Test":
         show_form()
-    elif page == "Uitslagen":
+    elif page == "Result":
         show_result()
 
 # Main entry point
