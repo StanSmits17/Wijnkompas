@@ -9,7 +9,7 @@ from result import show_result
 def menu():
     st.sidebar.title("Menu")
     # Set "Home" as the default page
-    page = st.sidebar.radio("Ga naar: ", ["Home", "Vragenlijst", "Uitslagen"], index=0)
+    page = st.sidebar.radio("Ga naar: ", ["Home", "Test", "Result"], index=0)
 
     if page == "Home":
         show_home()
