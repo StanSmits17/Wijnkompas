@@ -83,7 +83,7 @@ def show_form():
     # Final preference question
     preference = st.selectbox(
         "Where does your preference lie?",
-        ("Strak droog (zuur)", "Volle zachte droge wijn (body/vol)", "Mild droge wijn (suiker/zoet)")
+        ("Tightly dry wine (acid)", "Full softly dry wine (full bodied)", "Mild dry wine (sweet)")
     )
     
     if st.button("Submit Preferences"):
@@ -91,9 +91,9 @@ def show_form():
         data.to_csv(data_path, index=False)
         
         # Find best match based on preference
-        if preference == "Strak droog (zuur)":
+        if preference == "Tightly dry wine (acid)":
             best_match = data.loc[data['Zuur'].idxmax(), 'Druivensoort']
-        elif preference == "Volle zachte droge wijn (body/vol)":
+        elif preference == "Full softly dry wine (full bodied)":
             best_match = data.loc[data['Body / vol'].idxmax(), 'Druivensoort']
         else:
             best_match = data.loc[data['Suiker / zoet'].idxmax(), 'Druivensoort']
