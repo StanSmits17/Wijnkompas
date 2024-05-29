@@ -10,31 +10,43 @@ from sklearn.metrics.pairwise import cosine_similarity
 import matplotlib.pyplot as plt
 from math import pi
 import io
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 def send_email(receiver_address, subject, body, plot_img):
     sender_address = st.secrets["email"]["sender"]
-    sender_pass = st.secrets["email"]["app_password"]  # Use the App Password here
-    smtp_server = 'smtp.gmail.com'
-    smtp_port = 587  # TLS
-    
-    server = smtplib.SMTP(smtp_server, smtp_port)
-    server.starttls()
-    server.login(sender_address, sender_pass)
-    
-    message = MIMEMultipart("related")
-    message['From'] = sender_address
-    message['To'] = receiver_address
-    message['Subject'] = subject
+    sender_pass = st.secrets["email"]["app_password"]
+    smtp_server = st.secrets["email"]["smtp_server"]
+    smtp_port = st.secrets["email"]["smtp_port"]
 
-    message.attach(MIMEText(body, 'html'))
+    try:
+        # Setup the SMTP server
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.set_debuglevel(1)
+        server.starttls()
+        server.login(sender_address, sender_pass)
 
-    img = MIMEImage(plot_img.getvalue())
-    img.add_header('Content-ID', '<plot>')
-    message.attach(img)
+        message = MIMEMultipart("related")
+        message['From'] = sender_address
+        message['To'] = receiver_address
+        message['Subject'] = subject
 
-    server.send_message(message)
-    server.quit()
+        message.attach(MIMEText(body, 'html'))
 
+        img = MIMEImage(plot_img.getvalue())
+        img.add_header('Content-ID', '<plot>')
+        message.attach(img)
+
+        server.send_message(message)
+        server.quit()
+        st.success("Email sent successfully")
+    except smtplib.SMTPAuthenticationError as e:
+        logging.error(f"Failed to login: {e}")
+        st.error("Failed to login. Check your email and app password.")
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        st.error(f"An error occurred: {e}")
 
 def show_result():
     user_data = pd.read_csv('csv/user_data.csv')
@@ -44,7 +56,7 @@ def show_result():
     nn_model.fit(data.drop('Druivensoort', axis=1))
     distances, indices = nn_model.kneighbors(user_data.drop('Druivensoort', axis=1))
 
-    st.subheader("Top 5 grape recommandations")
+    st.subheader("Top 5 grape recommendations")
     user_profile = user_data.drop('Druivensoort', axis=1).values
     top_grapes_indices = indices[0]
     top_grapes = data.iloc[top_grapes_indices]
@@ -90,7 +102,9 @@ def show_result():
     fig.savefig(plot_buffer, format='png')
     plot_buffer.seek(0)
 
-    email = st.text_input("What's your mail adress?")
-    if st.button("Send result."):
-        html_content = f"<html><body><p>Hier zijn uw top 5 aanbevolen druif soorten:</p>{match_df.to_html(index=False)}<br><p>Vergelijkbare druiven:</p>{cluster_df.to_html(index=False)}<br><img src='cid:plot' alt='Graph'></body></html>"
-        send_email(email, "Uw druif aanbeveling.", html_content, plot_buffer)
+    email = st.text_input("What's your mail address?")
+    if st.button("Send result"):
+        html_content = f"<html><body><p>Here are your top 5 recommended grape varieties:</p>{match_df.to_html(index=False)}<br><p>Similar grapes:</p>{cluster_df.to_html(index=False)}<br><img src='cid:plot' alt='Graph'></body></html>"
+        send_email(email, "Your Grape Recommendations", html_content, plot_buffer)
+
+show_result()
