@@ -90,7 +90,7 @@ def show_result():
     fig.savefig(plot_buffer, format='png')
     plot_buffer.seek(0)
 
-    email = st.text_input("Wat is uw e-mailadres?")
-    if st.button("Verzend resultaat."):
+    email = st.text_input("What's your mail adress?")
+    if st.button("Send result."):
         html_content = f"<html><body><p>Hier zijn uw top 5 aanbevolen druif soorten:</p>{match_df.to_html(index=False)}<br><p>Vergelijkbare druiven:</p>{cluster_df.to_html(index=False)}<br><img src='cid:plot' alt='Graph'></body></html>"
         send_email(email, "Uw druif aanbeveling.", html_content, plot_buffer)
