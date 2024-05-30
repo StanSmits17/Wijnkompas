@@ -76,7 +76,7 @@ def show_result():
     cluster_data = data.iloc[kmeans.labels_ == cluster_label[0]]['Druivensoort']
     cluster_df = pd.DataFrame(cluster_data, columns=['Druivensoort']).reset_index(drop=True)
     st.subheader("Grapes that are very similar to your best fit")
-    st.table(cluster_df)
+    st.table(cluster_df.set_index('Druivensoort'))
 
     labels = data.columns[1:]
     stats_user = user_data.iloc[0, 1:].tolist()
