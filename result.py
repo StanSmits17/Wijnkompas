@@ -69,15 +69,14 @@ def show_result():
         matches.append((data.iloc[index]['Druivensoort'], match_percentage))
 
     match_df = pd.DataFrame(matches, columns=['Druivensoort', 'Match Percentage'])
-    match_df.index = match_df.index + 1  # Verhoog de index met 1 zodat deze begint bij 1
-    st.table(match_df.style.hide(axis='index'))
+    st.table(match_df.style.hide_index().set_table_attributes('border="1"'))
 
     kmeans = KMeans(n_clusters=4, random_state=0).fit(data.drop('Druivensoort', axis=1))
     cluster_label = kmeans.predict(user_data.drop('Druivensoort', axis=1))
     cluster_data = data.iloc[kmeans.labels_ == cluster_label[0]]['Druivensoort']
     cluster_df = pd.DataFrame(cluster_data, columns=['Druivensoort']).reset_index(drop=True)
     st.subheader("Grapes that are very similar to your best fit")
-    st.table(cluster_df.style.hide(axis='index').set_table_attributes('border="1"'))
+    st.table(cluster_df.style.hide_index().set_table_attributes('border="1"'))
 
     labels = data.columns[1:]
     stats_user = user_data.iloc[0, 1:].tolist()
