@@ -76,7 +76,7 @@ def show_result():
     cluster_data = data.iloc[kmeans.labels_ == cluster_label[0]]['Druivensoort']
     cluster_df = pd.DataFrame(cluster_data, columns=['Druivensoort'])
     st.subheader("Grapes that are very similar to your best fit")
-    st.table(cluster_df['Druivensoort'].reset_index(drop=True))
+    st.table(cluster_df['Druivensoort'].reset_index(drop=True), index=False)
 
     labels = data.columns[1:]
     stats_user = user_data.iloc[0, 1:].tolist()
@@ -104,7 +104,4 @@ def show_result():
 
     email = st.text_input("What's your mail address?")
     if st.button("Send result"):
-        html_content = f"<html><body><p>Here are your top 5 recommended grape varieties:</p>{match_df.to_html(index=False)}<br><p>Similar grapes:</p>{cluster_df.to_html(index=False)}<br><img src='cid:plot' alt='Graph'></body></html>"
-        send_email(email, "Your Grape Recommendations", html_content, plot_buffer)
-
-show_result()
+        html_content = f```<html><body><p>Here are your top 5 recommended grape varieties:</p>{match_df.to_html(index=False)}<br><p>Similar grapes:</p>{cluster_df.to_html
