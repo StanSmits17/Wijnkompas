@@ -104,7 +104,7 @@ def show_result():
 
     email = st.text_input("What's your mail address?")
     if st.button("Send result"):
-        html_content = f```<html><body><p>Here are your top 5 recommended grape varieties:</p>{match_df.to_html(index=False)}<br><p>Similar grapes:</p>{cluster_df.to_html
+        html_content = f"""<html><body><p>Here are your top 5 recommended grape varieties:</p>{match_df.to_html(index=False)}<br><p>Similar grapes:</p>{cluster_df.to_html(index=False)}<br><img src='cid:plot' alt='Graph'></body></html>"""
         send_email(email, "Your Grape Recommendations", html_content, plot_buffer)
 
 show_result()
