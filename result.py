@@ -52,7 +52,7 @@ def show_result():
     user_data = pd.read_csv('csv/user_data.csv')
     data_path = 'csv/data.csv'
     data = pd.read_csv(data_path)
-    nn_model = NearestNeighbors(n_neighbors=20)
+    nn_model = NearestNeighbors(n_neighbors=5)
     nn_model.fit(data.drop('Druivensoort', axis=1))
     distances, indices = nn_model.kneighbors(user_data.drop('Druivensoort', axis=1))
 
@@ -75,7 +75,7 @@ def show_result():
     cluster_label = kmeans.predict(user_data.drop('Druivensoort', axis=1))
     cluster_data = data.iloc[kmeans.labels_ == cluster_label[0]]['Druivensoort']
     cluster_df = pd.DataFrame(cluster_data)
-    st.subheader("Similar grapes")
+    st.subheader("Grapes that are very similar to your best fit")
     st.table(cluster_data)
 
     labels = data.columns[1:]
