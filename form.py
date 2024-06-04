@@ -60,16 +60,16 @@ def show_form():
     
     column_images = {
         "Citrusfruit": f"png/Citrusfruit.jpg",
-        "Appel": f"png/Appel.jpg",
-        "Tropisch fruit": f"png/Tropisch_fruit.jpg",
-        "Steenfruit": f"png/Steenfruit.jpg",
-        "Meloen": f"png/Meloen.jpg",
-        "Peer": f"png/Peer.jpg",
-        "Noten": f"png/Noten.jpg",
-        "Rood fruit": f"png/Rood_fruit.jpg",
-        "Bloemen": f"png/Bloemen.jpg",
-        "Honing": f"png/Honing.jpg",
-        "Kruiden": f"png/Kruiden.jpg"
+        "Apple": f"png/Appel.jpg",
+        "Tropical fruit": f"png/Tropisch_fruit.jpg",
+        "Stonefruit": f"png/Steenfruit.jpg",
+        "Melon": f"png/Meloen.jpg",
+        "Pear": f"png/Peer.jpg",
+        "Nuts": f"png/Noten.jpg",
+        "Red fruit": f"png/Rood_fruit.jpg",
+        "Flowers": f"png/Bloemen.jpg",
+        "Honey": f"png/Honing.jpg",
+        "Herbs": f"png/Kruiden.jpg"
     }
     
     for column in data.columns[4:]:  # Skip the name and the first three columns already handled
