@@ -10,8 +10,8 @@ def show_home():
     
     if st.button("Save"):
         # Define the column names as specified
-        columns = ["Druivensoort", "Zuur", "Body / vol", "Suiker / zoet", "Citrusfruit", "Apple", "Tropical fruit", 
-                   "Stonefruit", "Melon", "Pear", "Nuts", "Red fruit", "Flowers", "Honey", "Herbs"]
+        columns = ["Druivensoort", "Zuur", "Body / vol", "Suiker / zoet", "Citrusfruit", "Appel", "Tropisch fruit", 
+                   "Steenfruit", "Meloen", "Peer", "Noten", "Rood fruit", "Bloemen", "Honing", "Kruiden"]
 
         # Initialize CSV with the name and zero for other columns
         initial_values = [name] + [0.0] * 14  # Name and zeros for other wine-related columns
